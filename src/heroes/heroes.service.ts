@@ -1,26 +1,36 @@
 import { Injectable } from '@nestjs/common';
+import { HeroesRepository } from './heroes.repository';
 import { CreateHeroDto } from './dto/create-hero.dto';
 import { UpdateHeroDto } from './dto/update-hero.dto';
-
 @Injectable()
 export class HeroesService {
-  create(createHeroDto: CreateHeroDto) {
-    return 'This action adds a new hero';
+  constructor(private readonly heroesRepository: HeroesRepository) {}
+
+  async create(createHeroDto: CreateHeroDto) {
+    const createHero = await this.heroesRepository.createOne(createHeroDto);
+    return createHero;
   }
 
-  findAll() {
-    return `This action returns all heroes`;
+  async findAll() {
+    const getAllHeroes = await this.heroesRepository.findAll();
+    return getAllHeroes;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} hero`;
+  async findOne(id: string) {
+    const getHeroById = await this.heroesRepository.findOne(id);
+    return getHeroById;
   }
 
-  update(id: number, updateHeroDto: UpdateHeroDto) {
-    return `This action updates a #${id} hero`;
+  async update(id: string, updateHeroDto: UpdateHeroDto) {
+    const updateHeroById = await this.heroesRepository.updateOne(
+      id,
+      updateHeroDto,
+    );
+    return updateHeroById;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} hero`;
+  async remove(id: string) {
+    const getHeroById = await this.heroesRepository.deleteOne(id);
+    return getHeroById;
   }
 }

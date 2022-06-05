@@ -1,8 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { HeroesService } from './heroes.service';
 import { CreateHeroDto } from './dto/create-hero.dto';
 import { UpdateHeroDto } from './dto/update-hero.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('heroes')
 @Controller('heroes')
 export class HeroesController {
   constructor(private readonly heroesService: HeroesService) {}
@@ -19,16 +29,16 @@ export class HeroesController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.heroesService.findOne(+id);
+    return this.heroesService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateHeroDto: UpdateHeroDto) {
-    return this.heroesService.update(+id, updateHeroDto);
+    return this.heroesService.update(id, updateHeroDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.heroesService.remove(+id);
+    return this.heroesService.remove(id);
   }
 }

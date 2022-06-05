@@ -9,7 +9,7 @@ export class HeroDo {
   catch_phrase: string;
   images: string;
 
-  constructor(props: Partial<PostDo>) {
+  constructor(props: Partial<HeroDo>) {
     this._id = props._id;
     this.nickname = props.nickname || null;
     this.real_name = props.real_name || null;
