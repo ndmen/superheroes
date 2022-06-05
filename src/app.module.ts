@@ -2,9 +2,15 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { HeroesModule } from './heroes/heroes.module';
+import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
-  imports: [HeroesModule],
+  imports: [
+    ConfigModule.forRoot(),
+    MongooseModule.forRoot(`${process.env.HMONGODB}`),
+    HeroesModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
