@@ -9,11 +9,11 @@ CRUD app about superheroes 🤖 (With Files Module)
 
 ## Routes
 
+POST/heroes/{id}
+
 GET /heroes
 
 GET /heroes/{id}
-
-POST/heroes/{id}
 
 PATCH /heroes/{id}
 
