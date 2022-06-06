@@ -13,9 +13,9 @@ GET /heroes
 
 GET /heroes/{id}
 
-PATCH /heroes/{id}
+POST/heroes/{id}
 
-UPDATE /heroes/{id}
+PATCH /heroes/{id}
 
 DELETE /heroes/{id}
 
