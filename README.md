@@ -7,9 +7,27 @@
 
 CRUD app about superheroes 🤖 (With Files Module)
 
+## Routes
+
+GET /heroes
+
+GET /heroes/{id}
+
+PATCH /heroes/{id}
+
+UPDATE /heroes/{id}
+
+DELETE /heroes/{id}
+
+Where {id} - ObjectId(_id) documents in Mongo DB.
+
 ## Installation
 
 ```bash
+# install pnpm
+$ npm install -g pnpm
+
+# install packages
 $ pnpm install
 ```
 
