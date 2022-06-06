@@ -17,4 +17,8 @@ describe('HeroesController', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
+
+  // it('should return an array of heroes', async () => {
+  //   expect(await controller.findAll()).toBeDefined();
+  // });
 });
