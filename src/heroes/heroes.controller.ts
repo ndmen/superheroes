@@ -6,20 +6,25 @@ import {
   Patch,
   Param,
   Delete,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 import { HeroesService } from './heroes.service';
 import { CreateHeroDto } from './dto/create-hero.dto';
 import { UpdateHeroDto } from './dto/update-hero.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiConsumes } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('heroes')
 @Controller('heroes')
 export class HeroesController {
   constructor(private readonly heroesService: HeroesService) {}
 
+  @UseInterceptors(FileInterceptor('images'))
+  @ApiConsumes('multipart/form-data')
   @Post()
-  create(@Body() createHeroDto: CreateHeroDto) {
-    return this.heroesService.create(createHeroDto);
+  uploadFile(@Body() body: CreateHeroDto, @UploadedFile() images) {
+    return this.heroesService.createFile(body, images);
   }
 
   @Get()
@@ -32,9 +37,15 @@ export class HeroesController {
     return this.heroesService.findOne(id);
   }
 
+  @UseInterceptors(FileInterceptor('images'))
+  @ApiConsumes('multipart/form-data')
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateHeroDto: UpdateHeroDto) {
-    return this.heroesService.update(id, updateHeroDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateHeroDto: UpdateHeroDto,
+    @UploadedFile() images,
+  ) {
+    return this.heroesService.update(id, updateHeroDto, images);
   }
 
   @Delete(':id')

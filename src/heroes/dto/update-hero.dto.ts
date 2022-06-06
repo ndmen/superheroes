@@ -28,7 +28,6 @@ export class UpdateHeroDto {
   catch_phrase: string;
 
   @ApiProperty()
-  @IsString()
   @IsOptional()
   images: string;
 }

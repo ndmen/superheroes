@@ -8,9 +8,17 @@ export class HeroesRepository {
     private heroModel: Model<HeroDo>,
   ) {}
 
-  async createOne(createHeroDto): Promise<any> {
-    const createHero = await this.heroModel.create(createHeroDto);
+  async createOne(body): Promise<any> {
+    const createHero = await this.heroModel.create(body);
     return createHero;
+  }
+
+  async updateOneFile(id, images): Promise<any> {
+    const updateHeroById = await this.heroModel.findByIdAndUpdate(
+      { _id: id },
+      { images: images },
+    );
+    return updateHeroById;
   }
 
   async findAll(): Promise<any> {
