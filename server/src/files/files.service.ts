@@ -7,6 +7,9 @@ import * as uuid from 'uuid';
 export class FilesService {
   async create(file): Promise<string> {
     try {
+      if (!file) {
+        return 'No Image';
+      }
       const fileName = uuid.v4() + '.jpg';
       const filePath = path.resolve(__dirname, '..', 'static');
       if (!fs.existsSync(filePath)) {

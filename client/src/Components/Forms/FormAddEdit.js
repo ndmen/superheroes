@@ -4,7 +4,6 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 class AddEditForm extends React.Component {
   state = {
     _id: 0,
-    images: '',
     nickname: '',
     real_name: '',
     origin_description: '',
@@ -19,12 +18,11 @@ class AddEditForm extends React.Component {
   submitFormAdd = e => {
     e.preventDefault()
     fetch('http://localhost:4000/heroes', {
-      method: 'post',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        images: this.state.images,
         nickname: this.state.nickname,
         real_name: this.state.real_name,
         origin_description: this.state.origin_description,
@@ -47,8 +45,7 @@ class AddEditForm extends React.Component {
   submitFormEdit = e => {
     e.preventDefault()
     fetch('http://localhost:4000/heroes/' + this.props.item._id, {
-      method: 'patch',
-      enctype: "multipart/form-data",
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -76,18 +73,14 @@ class AddEditForm extends React.Component {
   componentDidMount(){
     // if item exists, populate the state with proper data
     if(this.props.item){
-      const { _id, images, nickname, real_name, origin_description, superpowers, catch_phrase } = this.props.item
-      this.setState({ _id, images, nickname, real_name, origin_description, superpowers, catch_phrase })
+      const { _id, nickname, real_name, origin_description, superpowers, catch_phrase } = this.props.item
+      this.setState({ _id, nickname, real_name, origin_description, superpowers, catch_phrase })
     }
   }
 
   render() {
     return (
       <Form onSubmit={this.props.item ? this.submitFormEdit : this.submitFormAdd}>
-          <FormGroup>
-          <Label for="images">Nickname</Label>
-          <Input type="file" name="images" id="images" onChange={this.onChange} value={this.state.images === null ? '' : this.state.images} />
-        </FormGroup>
         <FormGroup>
           <Label for="nickname">Nickname</Label>
           <Input type="text" name="nickname" id="nickname" onChange={this.onChange} value={this.state.nickname === null ? '' : this.state.nickname} />
